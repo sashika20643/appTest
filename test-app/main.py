@@ -3,7 +3,7 @@ import os
 import firebase_admin
 from firebase_admin import credentials, storage
 from pymongo import MongoClient
-from bson import ObjectId
+# from bson import ObjectId
 
 
 cred = credentials.Certificate("./social-lips-firebase-adminsdk-c28zn-d607a10c33.json")
@@ -89,18 +89,18 @@ def upload_file():
         return "File uploaded successfully"
     except Exception as e:
         return str(e), 500
-@app.route('/posts/<string:post_id>', methods=['GET'])
-def get_post(post_id):
-    try:
-        collection = db['posts']  # Replace 'posts' with your collection name
-        post = collection.find_one({"_id": ObjectId(post_id)})
-        if post:
-            del post['_id']
-            return jsonify({"post": post})
-        else:
-            return jsonify({"message": "Post not found"}), 404
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+# @app.route('/posts/<string:post_id>', methods=['GET'])
+# def get_post(post_id):
+#     try:
+#         collection = db['posts']  # Replace 'posts' with your collection name
+#         post = collection.find_one({"_id": ObjectId(post_id)})
+#         if post:
+#             del post['_id']
+#             return jsonify({"post": post})
+#         else:
+#             return jsonify({"message": "Post not found"}), 404
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=8080, debug=True)
 # [END gae_python3_app]
